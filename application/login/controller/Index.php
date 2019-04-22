@@ -9,10 +9,7 @@ class Index
 {
     public function index()
     {
-        $M = new my();
-//        dump($M->connect('blog_database'));
+        return view("index");
 
-        dump($M->checkDataBase('itembank_question',['id' => 2]));
-//        $M->query("show databases");
     }
 }
