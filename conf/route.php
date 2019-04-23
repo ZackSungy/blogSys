@@ -1,5 +1,6 @@
 <?php
 
 return[
-    'login.html' => 'login/index/index',
+    'signin' => 'login/index/login',
+    'register' => 'login/index/register',
 ];
