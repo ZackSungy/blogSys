@@ -5,4 +5,9 @@ return [
     'url_route_on' => true,
     'url_route_must' => false,
     'app_debug' => true,
+    'view_replace_str' => [
+        '__CSS__' =>'/static/login/css',
+        '__JS__'  =>'/static/login/js',
+        '__IMG__' =>'/static/login/img',
+    ],
 ];
