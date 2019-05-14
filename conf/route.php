@@ -2,6 +2,6 @@
 
 return[
     'signin' => 'login/index/login',
-    'register/:warrning$' => 'login/index/register',
+    'register' => 'login/index/register',
     'registercheck'=>'login/index/registercheck'
 ];

@@ -25,5 +25,10 @@ return [
         // 数据库表前缀
         'prefix'          => '',
     ],
-
+    "anumber"=>"账号",
+    "password"=>"密码",
+    "passwordcopy"=>"重复密码",
+    "pnumber"=>"手机号",
+    "email"=>"邮箱",
+    "vcode"=>"验证码",
 ];

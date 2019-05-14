@@ -10,4 +10,7 @@ return [
         '__JS__'  =>'/static/login/js',
         '__IMG__' =>'/static/login/img',
     ],
+
+    'name'=>
+        ["anumber"=>"账号","password"=>"密码","pnumber"=>"手机号","email"=>"邮箱","vcode"=>"验证码"],
 ];

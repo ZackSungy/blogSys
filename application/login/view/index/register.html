@@ -11,17 +11,18 @@
     <div class="box" id="ds">
         <form action="http://localhost/registercheck" method="post">
         <table>
-            <tr><th colspan="2"><h2>注册</h2></th></tr>
-            <tr><td>账号</td><td><input type="text" name="anumber" maxlength="20"></td><td><span>*必填</span></td></tr>
-            <tr><td colspan="2"><p>请使用半角的 a-z 或数字 0-9</p></td></tr>
-            <tr><td>密码</td><td><input type="password" name="password" maxlength="20"></td><td><span>*必填</span></td></tr>
-            <tr><td>手机号</td><td><input type="text" name="pnumber" maxlength="11"></td><td><span></span></td></tr>
-            <tr><td>邮箱</td><td><input type="text" name="email" maxlength="30"></td><td><span>*必填</span></td></tr>
+            <tr><th colspan="3"><h2>注册</h2></th></tr>
+            <tr><td>账号</td><td><input type="text" name="anumber" maxlength="20" value="{$anumber}"></td><td><span>{$anb_war}</span></td></tr>
+            <tr><td colspan="3"><p>请使用半角的 a-z 或数字 0-9</p></td></tr>
+            <tr><td>密码</td><td><input type="password" name="password" maxlength="20" value="{$password}"></td><td><span>{$ps_war}</span></td></tr>
+            <tr><td>重复密码</td><td><input type="password" name="passwordcopy" maxlength="20"  value="{$passwordcopy}"></td><td><span>{$psc_war}</span></td></tr>
+            <tr><td>手机号</td><td><input type="text" name="pnumber" maxlength="11"  value="{$pnumber}"></td><td><span>{$pn_war}</span></td></tr>
+            <tr><td>邮箱</td><td><input type="text" name="email" maxlength="30"  value="{$email}"></td><td><span>{$em_war}</span></td></tr>
             <tr><td colspan="3"><p>请使用真实电子邮箱注册，我们不会将你的邮箱地址分享给任何人</p></td></tr>
-            <tr><td>验证码</td><td><input type="text" name="check" maxlength="8"></td><td><span>*必填</span></td></tr>
-            <tr><td colspan="2">{}</td></tr>
+            <tr><td>验证码</td><td><input type="text" name="vcode" maxlength="8"  value="{$vcode}"></td><td><span>{$vc_war}</span></td></tr>
+            <tr><td colspan="3">{}</td></tr>
             <tr><td>{}</td><td>{}</td></tr>
-            <tr><td colspan="2"><input type="submit" value="注册" onclick="check()"></td></tr>
+            <tr><td colspan="3"><input type="submit" value="注册" onclick="check()"></td></tr>
         </table>
         </form>
     </div>
