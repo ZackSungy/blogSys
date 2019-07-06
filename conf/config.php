@@ -11,6 +11,14 @@ return [
         '__IMG__' =>'/static/login/img',
     ],
 
+    'APP_URL' => 'http://localhost:8098',
+
     'name'=>
-        ["anumber"=>"账号","password"=>"密码","pnumber"=>"手机号","email"=>"邮箱","vcode"=>"验证码"],
+        [
+        "username"=>"用户名",
+        "password"=>"密码",
+        "pnumber"=>"手机号",
+        "email"=>"邮箱",
+        "vcode"=>"验证码"
+    ],
 ];

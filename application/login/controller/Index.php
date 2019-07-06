@@ -3,18 +3,54 @@
 
 namespace  app\login\controller;
 
-use app\common\controller\Mysql as my;
+use app\common\controller\BlogPage as Page;
+use app\common\controller\Mysql as Sql;
 use think\Db;
 use \think\Request;
 use think\Controller;
 
 class Index extends Controller
 {//anumber:账号    password:密码     pnumber:手机号码    email:邮箱    vcode:验证码
+    
 
-    public $truecode="hello";
+    public function __construct(){
+        parent::__construct();
+        $page = new Page();
+        config("foot",$page->displayFooter());
+    }
+
+    private $truecode="";
+
+
+    public function show($name){
+        $page = new Page();
+        $page->buttons = array(
+            "首页" => "http://localhost:8098/home",
+            "登陆" => "http://localhost:8098/signin",
+            "注册" => "http://localhost:8098/register",
+        );
+        $page->title = $name;
+
+        $page->displayTop();
+    }
+
+    public function getRandomStr($len){
+        $lowercase=range('a','z');
+        $capitalized=range('A','Z');
+        $number=range('0','9');
+        $chars=array_merge($lowercase,$capitalized,$number);
+        shuffle($chars);
+        $charslen=count($chars)-1;
+        $output='';
+        for($i=0;$i<$len;$i++){
+            $output.=$chars[mt_rand(0,$charslen)];
+        }   
+        return $output;
+    }
 
     public function login()
     {
+        $this->show("login");
         return view("login");
     }
 
@@ -27,7 +63,9 @@ class Index extends Controller
 
     public function register()
     {
-        $this->assign(["truecode"=> "hello"]);
+        $this->show("register");
+        $this->truecode=$this->getRandomStr(8);
+        $this->assign(["truecode"=> $this->truecode]);
         return view("register");
     }
 
@@ -62,11 +100,18 @@ class Index extends Controller
         else if($data["password"]!=$data["passwordcopy"]){
             $this->error('两次填写密码不相同！');
         }
-        else if($data["code"]!="hello"){
+        else if($data["code"]!=$this->truecode){
             $this->error('验证码不正确');
         }
         else {
-            $this->success('注册成功！','http://localhost/signin');
+            $this->success('注册成功！',config("app_url")."signin");
         }
+    }
+
+    public function information1(){
+        dump(config());
+        // $this->show('login');
+        // return view("login");
+        // dump(config());
     }
 }
