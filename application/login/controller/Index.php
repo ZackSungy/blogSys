@@ -9,20 +9,31 @@ use think\Db;
 use \think\Request;
 use think\Controller;
 
+
+import("Vendor.Classes.topthink.think-captcha");
+
 class Index extends Controller
 {//anumber:账号    password:密码     pnumber:手机号码    email:邮箱    vcode:验证码
     
+    // private $truecode = "";
+
+
 
     public function __construct(){
         parent::__construct();
         $page = new Page();
+        $address=[];
+        //页脚设置
         config("foot",$page->displayFooter());
+        //网站的地址名称设置
+        foreach(config('url_name') as $key => $value)
+        {
+                $address[$value]=config("app_url").$value;
+        }
+        config("address",$address);
     }
 
-    private $truecode="";
-
-
-    public function show($name){
+    public function show($name,$css=[],$js=[]){
         $page = new Page();
         $page->buttons = array(
             "首页" => "http://localhost:8098/home",
@@ -31,7 +42,7 @@ class Index extends Controller
         );
         $page->title = $name;
 
-        $page->displayTop();
+        $page->displayTop($css,$js);
     }
 
     public function getRandomStr($len){
@@ -54,18 +65,11 @@ class Index extends Controller
         return view("login");
     }
 
-//    public function register($data=["anumber"=>"","password"=>"","passwordcopy"=>"","pnumber"=>"","email"=>"","vcode"=>""],$waring=["anb_war"=>"*必填","ps_war"=>"*必填","psc_war"=>"*必填","pn_war"=>"*必填","em_war"=>"*必填","vc_war"=>"*必填"])
-//    {
-//        $this->assign($data);
-//        $this->assign($waring);
-//        return view("register");
-//    }
-
-    public function register()
+    public function register($id='')
     {
-        $this->show("register");
-        $this->truecode=$this->getRandomStr(8);
-        $this->assign(["truecode"=> $this->truecode]);
+        $js=["login"];
+        $this->show("register",[],$js);
+        
         return view("register");
     }
 
@@ -100,18 +104,23 @@ class Index extends Controller
         else if($data["password"]!=$data["passwordcopy"]){
             $this->error('两次填写密码不相同！');
         }
-        else if($data["code"]!=$this->truecode){
+        else if(!captcha_check($data["captcha"])){
             $this->error('验证码不正确');
         }
         else {
-            $this->success('注册成功！',config("app_url")."signin");
+            $this->success('注册成功！',config("address")["signin"]);
         }
     }
 
-    public function information1(){
-        dump(config());
+    public function information1($id = ' '){
+        // return captcha($id);
         // $this->show('login');
         // return view("login");
-        // dump(config());
+        dump(config());
+        dump(config('url_name'));
+    }
+
+    public function captcha($id=""){
+            return captcha($id);
     }
 }

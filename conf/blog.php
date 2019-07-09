@@ -25,10 +25,29 @@ return [
         // 数据库表前缀
         'prefix'          => '',
     ],
+
+    'view_replace_str' => [
+        '__CSS__' =>'/static/blog/css/',
+        '__JS__'  =>'/static/blog/js/',
+        '__IMG__' =>'/static/blog/img/',
+    ],
+    
+    'name'=>[
     "username"=>"用户名",
     "password"=>"密码",
     "passwordcopy"=>"重复密码",
     "pnumber"=>"手机号",
     "email"=>"邮箱",
     "vcode"=>"验证码",
+    ],
+
+    'APP_URL' => 'http://localhost:8098/',
+
+    'URL_NAME' =>[
+        "signin",
+        "register",
+        "registercheck",
+        "information",
+        "captcha",
+    ],
 ];

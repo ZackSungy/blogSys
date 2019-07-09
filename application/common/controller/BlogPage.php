@@ -18,11 +18,11 @@ class BlogPage{
     }
     //页面设计
     public function displayTitle(){
-        return "<title>".$this->title."</title>";
+        return "<title>".$this->title."</title>\n";
     }
 
     public function displaykeywords(){
-        return "<meta name = 'keywords' content = '".$this->keywords."'/ >";
+        return "<meta name = 'keywords' content = '".$this->keywords."'/ >\n";
     }
 
     public function displayTop($css=[],$js=[]){
@@ -43,11 +43,11 @@ class BlogPage{
    }
 
     public function displayStyles(){
-            return "<link href = 'style.css' type = 'text/css' rel = 'styleheet'";
+            return "<link href = 'style.css' type = 'text/css' rel = 'styleheet'>\n";
     }
 
     public function displayHead(){
-            echo "<header><h1>SkyFire</h1></header>";
+            echo "<header><h1>SkyFire</h1></header>\n";
     }
 
     public function isURLCurrentPage($url){
@@ -81,7 +81,7 @@ class BlogPage{
         while(list($name,$url)=each($this->buttons)){
             $menu = $menu.$this->displayButton($name,$url,!$this->isURLCurrentPage($url));
         }
-        $menu = $menu."</nav>";
+        $menu = $menu."</nav>\n";
 
         return $menu;
     }
@@ -89,13 +89,13 @@ class BlogPage{
     public function displayFooter(){
         return "<footer>
             <p>CopyRight:ZackSunGY@2019</p>
-        </footer>";
+        </footer>\n";
     }
 
     public function useCSS($css){
         $list ="";
         while(list($key,$value) = each($css)){
-            $list = $list.'<link rel="stylesheet" href="__CSS__/'.$value.'">';
+            $list = $list.'<link rel="stylesheet" href="'.config('view_replace_str')['__CSS__'].$value.'.css">\n';
         }
         return $list;
     }
@@ -103,7 +103,8 @@ class BlogPage{
     public function useJS($js){
         $list ="";
         while(list($key,$value) = each($js)){
-            $list = $list.'<script type="text/javascript" src="__JS__/'.$value.'"></script>';
+            $list = $list.'<script type="text/javascript" src='.config('view_replace_str')['__JS__'].$value.'.js></script>
+            ';
         }
         return $list;
     }
