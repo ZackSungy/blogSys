@@ -14,7 +14,7 @@
                     <tr><td>{$Think.config.name.username}</td><td><input type="text" name="username" maxlength="20"></td></tr>
                     <tr><td>{$Think.config.name.password}</td><td><input type="password" name="password" maxlength="20"></td></tr>
                     <tr><td>{$Think.config.name.vcode}</td><td><input type="text" name="chack" maxlength="8"></td></tr>
-                    <tr><td colspan="2">{$Think.config.truecode}</tr>
+                    <tr><td colspan="2"><img src="{$Think.config.address.captcha}" onclick="refresh(this)" id="hello1"></tr>
                     <tr><td colspan="2"><input type="submit" value="登录"></td></tr>
                     <!-- <tr><td width="100px"></td><td><a href="http://localhost/register/1"><input type="button" value="注册" style="margin-left: 27px"></a></td></tr> -->
                 </table>

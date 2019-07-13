@@ -13,11 +13,11 @@ return [
         // 服务器地址
         'hostname'        => '127.0.0.1',
         // 数据库名
-        'database'        => 'blog_sys',
+        'database'        => 'blogSys',
         // 数据库用户名
         'username'        => 'root',
         // 数据库密码
-        'password'        => 'work123',
+        'password'        => 'ZackMac2019...',
         // 数据库连接端口
         'hostport'        => '3306',
         // 数据库编码默认采用utf8
@@ -43,7 +43,7 @@ return [
 
     'APP_URL' => 'http://localhost:8098/',
 
-    'URL_NAME' =>[
+    'url_name' =>[
         "signin",
         "register",
         "registercheck",

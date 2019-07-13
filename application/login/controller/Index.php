@@ -9,13 +9,8 @@ use think\Db;
 use \think\Request;
 use think\Controller;
 
-
-import("Vendor.Classes.topthink.think-captcha");
-
 class Index extends Controller
-{//anumber:账号    password:密码     pnumber:手机号码    email:邮箱    vcode:验证码
-    
-    // private $truecode = "";
+{//anumber:账号    password:密码     pnumber:手机号码    email:邮箱    captcha:验证码
 
 
 
@@ -80,23 +75,20 @@ class Index extends Controller
     //对注册用户进行检测
     public function registercheck(Request $request)
     {
+        $mysql = new Sql();
+
+
         $ifnull=true;
-//        $i=0;
-//        $war=["anb_war","ps_war","psc_war","pn_war","em_war","vc_war"];
         $data=$request->param();//username:用户名    password:密码     passwordcopy:重复密码     phonenumber:手机号码    email:邮箱    code:验证码
-//        $warning=["anb_war"=>"","ps_war"=>"","psc_war"=>"","pn_war"=>"","em_war"=>"","vc_war"=>""];//anb_war:账号提示错误      ps_war:密码提示错误      pn_war:手机号码提示错误      em_war:邮箱提示错误
 
         //循环查找是否为空
         foreach ($data as $key=>$value){
             if($value=="") {
                 $ifnull=false;
-//                $warning[$war[$i]] = config($key)."不能为空！";
-//                $sign=false;
             }
-//            $i++;
         }
 
-        dump($data);
+        
 
         if(!$ifnull){
             $this->error('必填项不能为空！');
@@ -108,16 +100,20 @@ class Index extends Controller
             $this->error('验证码不正确');
         }
         else {
+            $data["rtime"]=time();
+            unset($data["passwordcopy"]);
+            unset($data["captcha"]);
+            $mysql->addData("userinfo",$data);
             $this->success('注册成功！',config("address")["signin"]);
         }
     }
 
-    public function information1($id = ' '){
-        // return captcha($id);
-        // $this->show('login');
-        // return view("login");
-        dump(config());
-        dump(config('url_name'));
+    public function information($id = ' '){
+        $mysql = new Sql();
+        // phpinfo();
+        dump($mysql->checkData("userinfo"));
+        // dump(config());
+        // dump(config('url_name'));
     }
 
     public function captcha($id=""){

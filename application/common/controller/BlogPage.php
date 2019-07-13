@@ -104,7 +104,7 @@ class BlogPage{
         $list ="";
         while(list($key,$value) = each($js)){
             $list = $list.'<script type="text/javascript" src='.config('view_replace_str')['__JS__'].$value.'.js></script>
-            ';
+            ZackMac2019...';
         }
         return $list;
     }
