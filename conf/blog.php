@@ -45,9 +45,14 @@ return [
 
     'url_name' =>[
         "signin",
+        "signincheck",
         "register",
         "registercheck",
         "information",
         "captcha",
+    ],
+    'captcha' => [
+    //验证成功是否重置
+    'reset'  => true,
     ],
 ];

@@ -12,7 +12,7 @@
 <body>
 <div>
     <div class="box" id="ds">
-        <form action="http://localhost:8098/registercheck" method="post">
+        <form action={$Think.config.address.registercheck} method="post">
         <table>
             <tr><td>{$Think.config.name.username}</td><td><input type="text" name="username" maxlength="20"></td><td><span>*必填</span></td></tr>
             <tr><td colspan="3"><p>请使用半角的 a-z 或数字 0-9</p></td></tr>
@@ -22,7 +22,7 @@
             <tr><td>{$Think.config.name.email}</td><td><input type="text" name="email" maxlength="30"></td><td><span>*必填</span></td></tr>
             <tr><td colspan="3"><p>请使用真实电子邮箱注册，我们不会将你的邮箱地址分享给任何人</p></td></tr>
             <tr><td>{$Think.config.name.vcode}</td><td><input type="text" name="captcha" maxlength="8"></td><td><span>*必填</span></td></tr>
-            <tr><td colspan="3"><img src="{$Think.config.address.captcha}" onclick="refresh(this)" id="hello1"></td></tr>
+            <tr><td colspan="3"><img src={$Think.config.address.captcha} onclick="refresh(this)" id="hello1"></td></tr>
             <tr><td>{}</td><td>{}</td></tr>
             <tr><td colspan="3"><input type="submit" value="注册"></td></tr>
         </table>

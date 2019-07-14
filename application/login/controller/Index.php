@@ -56,7 +56,8 @@ class Index extends Controller
 
     public function login()
     {
-        $this->show("login");
+        $js=["login"];
+        $this->show("login",[],$js);
         return view("login");
     }
 
@@ -64,14 +65,16 @@ class Index extends Controller
     {
         $js=["login"];
         $this->show("register",[],$js);
-        
         return view("register");
     }
 
-    public function logincheck()
+    //对登陆页面进行检测
+    public function logincheck(Request $request)
     {
-
+        $data=$request->param();
+        dump(captcha_check($data["captcha"],1));
     }
+
     //对注册用户进行检测
     public function registercheck(Request $request)
     {
@@ -96,7 +99,7 @@ class Index extends Controller
         else if($data["password"]!=$data["passwordcopy"]){
             $this->error('两次填写密码不相同！');
         }
-        else if(!captcha_check($data["captcha"])){
+        else if(captcha_check($data["captcha"])){
             $this->error('验证码不正确');
         }
         else {
@@ -116,7 +119,7 @@ class Index extends Controller
         // dump(config('url_name'));
     }
 
-    public function captcha($id=""){
+    public function captcha($id=1){
             return captcha($id);
     }
 }
