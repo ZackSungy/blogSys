@@ -32,10 +32,9 @@ class BlogPage{
         echo $this -> displayStyles();
         echo $this->useCSS($css);
         echo $this->useJS($js);
+        echo "<h1>SkyFire</h1>";
         echo "</head>\n";
         echo $this->displayMenu();
-        // $this -> displayFooter();
-        // echo "</body>\n</html>\n";
     }
 
    public function displayBottom(){
@@ -95,7 +94,7 @@ class BlogPage{
     public function useCSS($css){
         $list ="";
         while(list($key,$value) = each($css)){
-            $list = $list.'<link rel="stylesheet" href="'.config('view_replace_str')['__CSS__'].$value.'.css">\n';
+            $list = $list.'<link rel="stylesheet" href="'.config('view_replace_str')['__CSS__'].$value.'.css">';
         }
         return $list;
     }
@@ -103,8 +102,7 @@ class BlogPage{
     public function useJS($js){
         $list ="";
         while(list($key,$value) = each($js)){
-            $list = $list.'<script type="text/javascript" src='.config('view_replace_str')['__JS__'].$value.'.js></script>
-            ZackMac2019...';
+            $list = $list.'<script type="text/javascript" src='.config('view_replace_str')['__JS__'].$value.'.js></script>';
         }
         return $list;
     }

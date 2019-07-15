@@ -10,9 +10,9 @@ return[
     // 数据库名
     'database'        => 'blogSys',
     // 数据库用户名
-    'username'        => 'root',
+    'username'        => 'blogSys',
     // 数据库密码
-    'password'        => 'ZackMac2019...',
+    'password'        => 'blogSys123456',
     // 数据库连接端口
     'hostport'        => '',
     // 数据库连接参数

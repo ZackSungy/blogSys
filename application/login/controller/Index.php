@@ -36,8 +36,7 @@ class Index extends Controller
             "注册" => "http://localhost:8098/register",
         );
         $page->title = $name;
-
-        $page->displayTop($css,$js);
+         $page->displayTop($css,$js);
     }
 
     public function getRandomStr($len){
@@ -61,18 +60,31 @@ class Index extends Controller
         return view("login");
     }
 
-    public function register($id='')
+    public function register()
     {
         $js=["login"];
-        $this->show("register",[],$js);
+        // $this->show("register",[],$js);
         return view("register");
     }
 
     //对登陆页面进行检测
     public function logincheck(Request $request)
     {
+        $mysql = new Sql();
         $data=$request->param();
-        dump(captcha_check($data["captcha"],1));
+        $where=[
+            "username" => $data["username"],
+            "password" => $data["password"],
+        ];
+        if(captcha_check($data["captcha"],1)){
+            $this->error('验证码不正确');
+        }
+        else if(!$mysql->checkData("userinfo",$where)){
+            $this->error("用户名或账号不存在或密码不匹配!!!");
+        }
+        else{
+            $this->success("登陆成功!!!");
+        }
     }
 
     //对注册用户进行检测
@@ -92,15 +104,14 @@ class Index extends Controller
         }
 
         
-
-        if(!$ifnull){
+        if(captcha_check($data["captcha"])){
+            $this->error('验证码不正确');
+        }
+        else if(!$ifnull){
             $this->error('必填项不能为空！');
         }
         else if($data["password"]!=$data["passwordcopy"]){
             $this->error('两次填写密码不相同！');
-        }
-        else if(captcha_check($data["captcha"])){
-            $this->error('验证码不正确');
         }
         else {
             $data["rtime"]=time();
