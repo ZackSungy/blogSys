@@ -10,10 +10,10 @@ use \think\Request;
 use think\Controller;
 
 class Index extends Controller
-{//anumber:账号    password:密码     pnumber:手机号码    email:邮箱    captcha:验证码
+{//username:账号    password:密码     phonenumber:手机号码    email:邮箱    captcha:验证码
 
 
-
+    //设置基本配置
     public function __construct(){
         parent::__construct();
         $page = new Page();
@@ -28,6 +28,7 @@ class Index extends Controller
         config("address",$address);
     }
 
+    //输出页面上方
     public function show($name,$css=[],$js=[]){
         $page = new Page();
         $page->buttons = array(
@@ -36,23 +37,11 @@ class Index extends Controller
             "注册" => "http://localhost:8098/register",
         );
         $page->title = $name;
-         $page->displayTop($css,$js);
+
+        $page->displayTop($css,$js);
     }
 
-    public function getRandomStr($len){
-        $lowercase=range('a','z');
-        $capitalized=range('A','Z');
-        $number=range('0','9');
-        $chars=array_merge($lowercase,$capitalized,$number);
-        shuffle($chars);
-        $charslen=count($chars)-1;
-        $output='';
-        for($i=0;$i<$len;$i++){
-            $output.=$chars[mt_rand(0,$charslen)];
-        }   
-        return $output;
-    }
-
+    //登陆页面
     public function login()
     {
         $js=["login"];
@@ -60,23 +49,24 @@ class Index extends Controller
         return view("login");
     }
 
-    public function register()
+    //注册页面
+    public function register($id='')
     {
         $js=["login"];
-        // $this->show("register",[],$js);
+        $this->show("register",[],$js);
         return view("register");
     }
 
     //对登陆页面进行检测
     public function logincheck(Request $request)
     {
-        $mysql = new Sql();
         $data=$request->param();
+        $mysql = new Sql();
         $where=[
             "username" => $data["username"],
             "password" => $data["password"],
         ];
-        if(captcha_check($data["captcha"],1)){
+        if(!captcha_check($data["captcha"],1)){
             $this->error('验证码不正确');
         }
         else if(!$mysql->checkData("userinfo",$where)){
@@ -104,11 +94,12 @@ class Index extends Controller
         }
 
         
-        if(captcha_check($data["captcha"])){
-            $this->error('验证码不正确');
-        }
-        else if(!$ifnull){
+
+        if(!$ifnull){
             $this->error('必填项不能为空！');
+        }
+        else if(!captcha_check($data["captcha"],1)){
+            $this->error('验证码不正确');
         }
         else if($data["password"]!=$data["passwordcopy"]){
             $this->error('两次填写密码不相同！');
@@ -122,6 +113,7 @@ class Index extends Controller
         }
     }
 
+    //测试页面信息
     public function information($id = ' '){
         $mysql = new Sql();
         // phpinfo();
@@ -130,6 +122,7 @@ class Index extends Controller
         // dump(config('url_name'));
     }
 
+    //输出验证码
     public function captcha($id=1){
             return captcha($id);
     }
