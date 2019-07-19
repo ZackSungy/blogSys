@@ -27,9 +27,9 @@ return [
     ],
 
     'view_replace_str' => [
-        '__CSS__' =>'/static/blog/css/',
-        '__JS__'  =>'/static/blog/js/',
-        '__IMG__' =>'/static/blog/img/',
+        '__CSS__' =>'/static/layui-v2.5.4/layui/css/',
+        '__JS__'  =>'/static/layui-v2.5.4/layui/',
+        '__IMG__' =>'/static/layui-v2.5.4/layui/images/face/',
     ],
     
     'name'=>[

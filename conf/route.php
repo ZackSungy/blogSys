@@ -1,10 +1,11 @@
 <?php
 
 return[
-    'signin' => 'login/index/login',
-    'signincheck' => 'login/index/logincheck',
-    'register' => 'login/index/register',
-    'registercheck'=>'login/index/registercheck',
-    'information'=>'login/index/information',
-    'captcha' => 'login/index/captcha',
+    'home' => 'blog/index/home',
+    'signin' => 'blog/index/signin',
+    'signincheck' => 'blog/index/logincheck',
+    'register' => 'blog/index/register',
+    'registercheck'=>'blog/index/registercheck',
+    'information'=>'blog/index/information',
+    'captcha' => 'blog/index/captcha',
 ];

@@ -1,12 +1,12 @@
 <?php
 
 
-namespace  app\login\controller;
+namespace  app\blog\controller;
 
 use app\common\controller\BlogPage as Page;
 use app\common\controller\Mysql as Sql;
 use think\Db;
-use \think\Request;
+use think\Request;
 use think\Controller;
 
 class Index extends Controller
@@ -41,18 +41,25 @@ class Index extends Controller
         $page->displayTop($css,$js);
     }
 
-    //登陆页面
-    public function login()
+    //主页面
+    public function home()
     {
-        $js=["login"];
-        $this->show("login",[],$js);
-        return view("login");
+        $this->show("home");
+        return view("home");
+    }
+
+    //登陆页面
+    public function signin()
+    {
+        $js=["signin"];
+        $this->show("signin",[],$js);
+        return view("signin");
     }
 
     //注册页面
     public function register($id='')
     {
-        $js=["login"];
+        $js=["signin"];
         $this->show("register",[],$js);
         return view("register");
     }
@@ -67,13 +74,13 @@ class Index extends Controller
             "password" => $data["password"],
         ];
         if(!captcha_check($data["captcha"],1)){
-            $this->error('验证码不正确');
+            $this->error('验证码不正确',config("address")["signin"]);
         }
         else if(!$mysql->checkData("userinfo",$where)){
-            $this->error("用户名或账号不存在或密码不匹配!!!");
+            $this->error("用户名或账号不存在或密码不匹配!!!",config("address")["signin"]);
         }
         else{
-            $this->success("登陆成功!!!");
+            $this->success("登陆成功!!!",config("address")["signin"]);
         }
     }
 
@@ -81,28 +88,23 @@ class Index extends Controller
     public function registercheck(Request $request)
     {
         $mysql = new Sql();
-
-
         $ifnull=true;
         $data=$request->param();//username:用户名    password:密码     passwordcopy:重复密码     phonenumber:手机号码    email:邮箱    code:验证码
-
         //循环查找是否为空
         foreach ($data as $key=>$value){
             if($value=="") {
                 $ifnull=false;
             }
         }
-
-        
-
+        //对注册用户的输入判断
         if(!$ifnull){
-            $this->error('必填项不能为空！');
+            $this->error('必填项不能为空！',config("address")["register"]);
         }
         else if(!captcha_check($data["captcha"],1)){
-            $this->error('验证码不正确');
+            $this->error('验证码不正确',config("address")["register"]);
         }
         else if($data["password"]!=$data["passwordcopy"]){
-            $this->error('两次填写密码不相同！');
+            $this->error('两次填写密码不相同！',config("address")["register"]);
         }
         else {
             $data["rtime"]=time();

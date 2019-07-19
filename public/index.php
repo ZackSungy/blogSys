@@ -22,3 +22,5 @@ define('CONF_PATH',__DIR__ .'/../conf/');
 
 // 加载框架引导文件
 require __DIR__ . '/../thinkphp/start.php';
+// 绑定当前入口文件到blog模块
+// \think\Route::bind('blog');
