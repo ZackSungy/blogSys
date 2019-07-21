@@ -36,9 +36,9 @@ return [
     "username"=>"用户名",
     "password"=>"密码",
     "passwordcopy"=>"重复密码",
-    "pnumber"=>"手机号",
+    "phonenumber"=>"手机号",
     "email"=>"邮箱",
-    "vcode"=>"验证码",
+    "captcha"=>"验证码",
     ],
 
     'APP_URL' => 'http://localhost:8098/',
@@ -50,6 +50,7 @@ return [
         "registercheck",
         "information",
         "captcha",
+        "checkcaptcha",
     ],
     'captcha' => [
     //验证成功是否重置

@@ -42,6 +42,11 @@ class BlogPage{
     public function displayStyles(){
         ?>
             <link href = 'style.css' type = 'text/css' rel = 'styleheet'>
+            <style>
+                body{
+                    background-color:#c2c2c2;
+                }
+            </style>
         <?php
     }
 
@@ -72,8 +77,14 @@ class BlogPage{
         <div class="layui-header header header-doc layui-bg-black">
         <div class="layui-main">
         <img class ="layui-col-md2" src=<?=config('view_replace_str')['__IMG__']."logo.gif"?> style="height:60px">
-        <div class="layui-col-md4"></div>
-        <ul class="layui-nav layui-col-md3" lay-filter="">        
+        <div class="layui-col-md4" style="height:60px;">
+        <label class="layui-form-label layui-icon-search layui-icon" style="line-height:40px;"></label>
+        <div class="layui-input-block" style="margin-top:10px;">
+        <input type="text" name="title" required  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" >
+        </div>
+        </div>
+        <div class="layui-col-md2"><a>$nbsp</a></div>
+        <ul class="layui-nav layui-col-md4" lay-filter="">        
         <?php
         while(list($name,$url)=each($this->buttons)){
             $this->displayButton($name,$url,!$this->isURLCurrentPage($url));
@@ -95,7 +106,7 @@ class BlogPage{
     }
 
     public function useCSS($css){
-        array_push($css,"layui","layui.mobile");
+        array_push($css,"layui");
         $list ="";
         while(list($key,$value) = each($css)){
             $list = $list.'<link rel="stylesheet" href="'.config('view_replace_str')['__CSS__'].$value.'.css">';

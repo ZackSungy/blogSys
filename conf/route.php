@@ -8,4 +8,5 @@ return[
     'registercheck'=>'blog/index/registercheck',
     'information'=>'blog/index/information',
     'captcha' => 'blog/index/captcha',
+    'checkcaptcha' => 'blog/index/checkcaptcha',
 ];

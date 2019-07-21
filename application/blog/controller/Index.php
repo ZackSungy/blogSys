@@ -74,10 +74,10 @@ class Index extends Controller
             "password" => $data["password"],
         ];
         if(!captcha_check($data["captcha"],1)){
-            $this->error('验证码不正确',config("address")["signin"]);
+            $this->error('验证码不正确');
         }
         else if(!$mysql->checkData("userinfo",$where)){
-            $this->error("用户名或账号不存在或密码不匹配!!!",config("address")["signin"]);
+            $this->error("用户名或账号不存在或密码不匹配!!!");
         }
         else{
             $this->success("登陆成功!!!",config("address")["signin"]);
@@ -98,13 +98,13 @@ class Index extends Controller
         }
         //对注册用户的输入判断
         if(!$ifnull){
-            $this->error('必填项不能为空！',config("address")["register"]);
+            $this->error('必填项不能为空！');
         }
         else if(!captcha_check($data["captcha"],1)){
-            $this->error('验证码不正确',config("address")["register"]);
+            $this->error('验证码不正确');
         }
         else if($data["password"]!=$data["passwordcopy"]){
-            $this->error('两次填写密码不相同！',config("address")["register"]);
+            $this->error('两次填写密码不相同！');
         }
         else {
             $data["rtime"]=time();
@@ -116,7 +116,7 @@ class Index extends Controller
     }
 
     //测试页面信息
-    public function information($id = ' '){
+    public function information($id = ''){
         $mysql = new Sql();
         // phpinfo();
         dump($mysql->checkData("userinfo"));
@@ -126,6 +126,12 @@ class Index extends Controller
 
     //输出验证码
     public function captcha($id=1){
-            return captcha($id);
+        return captcha($id);
+    }
+
+    public function checkcaptcha(Request $request){
+        $data=$request->param();
+        // return captcha_check($data["captcha"],1);
+        dump(captcha_check($data["captcha"],1));
     }
 }

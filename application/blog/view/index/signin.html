@@ -9,14 +9,40 @@
         <div class="layui-row layui-bg-gray layui-col-space10">
             <div class="layui-col-md9">
                 <form action={$Think.config.address.signincheck} method="post">
-                    <table>
-                        <tr><th colspan="2"><h2></h2></th></tr>
-                        <tr><td>{$Think.config.name.username}</td><td><input type="text" name="username" maxlength="20"></td></tr>
-                        <tr><td>{$Think.config.name.password}</td><td><input type="password" name="password" maxlength="20"></td></tr>
-                        <tr><td>{$Think.config.name.vcode}</td><td><input type="text" name="captcha" maxlength="8"></td></tr>
-                        <tr><td colspan="2"><img src="{$Think.config.address.captcha}" onclick="refresh(this)"></tr>
-                        <tr><td colspan="2"><input type="submit" value="登录"></td></tr>
-                    </table>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">{$Think.config.name.username}</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="username" required  lay-verify="required" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">请输入正确的用户名</div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">{$Think.config.name.password}</label>
+                        <div class="layui-input-inline">
+                            <input type="password" name="password" required lay-verify="required" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">请输入正确的密码</div>
+                    </div>
+                    <div class="layui-form-item">
+                            <label class="layui-form-label">{$Think.config.name.captcha}</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="captcha" required  lay-verify="required"  autocomplete="off" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">请正确输入下图的验证码</div>
+                    </div>
+                    <div class="layui-form-item">
+                            <label class="layui-form-label"></label>&nbsp</label>
+                            <div class="layui-input-inline">
+                                <input type="image" src="{$Think.config.address.captcha}"  class="layui-input" onclick="refresh(this)">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">点击刷新</div>
+                        </div>
+                    <div class="layui-form-item">
+                            <div class="layui-input-block">
+                              <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                              <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                          </div>
                 </form>
             </div>
         </div>
@@ -30,5 +56,29 @@
           
           //…
         });
+
+        //Demo
+layui.use('form', function(){
+  var form = layui.form;
+  
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+  });
+
+  form.verify({
+    username:[
+        /^[0-9A-Za-z]{1,30}$/
+        ,'请使用半角的 A-Za-z 或数字 0-9 且大小不超过30'
+    ]
+    ,password: [
+      /^[\S]{6,20}$/
+      ,'密码必须6到20位，且不能出现空格'
+    ]
+    ,captcha:[
+    /^[0-9A-Za-z]{5}$/
+    ,'请输入正确格式的验证码'
+    ],
+  });
+});
 </script>
 </html>
