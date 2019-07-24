@@ -15,7 +15,7 @@
 define('APP_PATH', __DIR__ . '/../application/');
 
 //定义配置文件目录
-define('CONF_PATH',__DIR__ .'/../conf/');
+define('CONF_PATH', __DIR__ .'/../conf/');
 
 //绑定模块(用于给第三方网站独立空间)
 //define("BIND_MODULE",'admin/index');

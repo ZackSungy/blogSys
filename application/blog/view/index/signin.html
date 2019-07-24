@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>login</title>
 </head>
+
 <body>
     <div class="layui-main site-inline">
         <div class="layui-row layui-bg-gray layui-col-space10">
@@ -12,37 +14,40 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">{$Think.config.name.username}</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="username" required  lay-verify="required" class="layui-input">
+                            <input type="text" name="username" required lay-verify="required" class="layui-input">
                         </div>
                         <div class="layui-form-mid layui-word-aux">请输入正确的用户名</div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">{$Think.config.name.password}</label>
                         <div class="layui-input-inline">
-                            <input type="password" name="password" required lay-verify="required" autocomplete="off" class="layui-input">
+                            <input type="password" name="password" required lay-verify="required" autocomplete="off"
+                                class="layui-input">
                         </div>
                         <div class="layui-form-mid layui-word-aux">请输入正确的密码</div>
                     </div>
                     <div class="layui-form-item">
-                            <label class="layui-form-label">{$Think.config.name.captcha}</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="captcha" required  lay-verify="required"  autocomplete="off" class="layui-input">
-                            </div>
-                            <div class="layui-form-mid layui-word-aux">请正确输入下图的验证码</div>
+                        <label class="layui-form-label">{$Think.config.name.captcha}</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="captcha" required lay-verify="required" autocomplete="off"
+                                class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">请正确输入下图的验证码</div>
                     </div>
                     <div class="layui-form-item">
-                            <label class="layui-form-label"></label>&nbsp</label>
-                            <div class="layui-input-inline">
-                                <input type="image" src="{$Think.config.address.captcha}"  class="layui-input" onclick="refresh(this)">
-                            </div>
-                            <div class="layui-form-mid layui-word-aux">点击刷新</div>
+                        <label class="layui-form-label"></label>&nbsp</label>
+                        <div class="layui-input-inline">
+                            <input type="image" src="{$Think.config.address.captcha}" class="layui-input"
+                                onclick="refresh(this)">
                         </div>
+                        <div class="layui-form-mid layui-word-aux">点击刷新</div>
+                    </div>
                     <div class="layui-form-item">
-                            <div class="layui-input-block">
-                              <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                              <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                            </div>
-                          </div>
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -50,35 +55,36 @@
     {$Think.config.foot}
 </body>
 <script>
-        //注意：导航 依赖 element 模块，否则无法进行功能性操作
-        layui.use('element', function(){
-          var element = layui.element;
-          
-          //…
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        var element = layui.element;
+
+        //…
+    });
+
+    //Demo
+    layui.use('form', function () {
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
         });
 
-        //Demo
-layui.use('form', function(){
-  var form = layui.form;
-  
-  //监听提交
-  form.on('submit(formDemo)', function(data){
-  });
-
-  form.verify({
-    username:[
-        /^[0-9A-Za-z]{1,30}$/
-        ,'请使用半角的 A-Za-z 或数字 0-9 且大小不超过30'
-    ]
-    ,password: [
-      /^[\S]{6,20}$/
-      ,'密码必须6到20位，且不能出现空格'
-    ]
-    ,captcha:[
-    /^[0-9A-Za-z]{5}$/
-    ,'请输入正确格式的验证码'
-    ],
-  });
-});
+        form.verify({
+            username: [
+                /^[0-9A-Za-z]{1,30}$/
+                , '请使用半角的 A-Za-z 或数字 0-9 且大小不超过30'
+            ]
+            , password: [
+                /^[\S]{6,20}$/
+                , '密码必须6到20位，且不能出现空格'
+            ]
+            , captcha: [
+                /^[0-9A-Za-z]{5}$/
+                , '请输入正确格式的验证码'
+            ],
+        });
+    });
 </script>
+
 </html>

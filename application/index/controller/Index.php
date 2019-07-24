@@ -2,14 +2,13 @@
 
 namespace app\index\controller;
 
-
 use think\Request;
 
 class Index
 {
-    public  function __construct()
+    public function __construct()
     {
-        config('before','IndexAction');
+        config('before', 'IndexAction');
     }
 
     public function index(Request $request)
@@ -17,8 +16,6 @@ class Index
         dump($request->domain());
         dump($request->pathinfo());
         dump($request->path());
-
-
     }
 
     //测试路由route
