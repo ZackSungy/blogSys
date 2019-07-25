@@ -25,20 +25,6 @@ class Index extends Controller
         config('address', $address);
     }
 
-    //输出页面上方
-    public function show($name, $css = [], $js = [])
-    {
-        $page = new Page();
-        $page->buttons = array(
-            '首页' => 'http://localhost:8098/home',
-            '登陆' => 'http://localhost:8098/signin',
-            '注册' => 'http://localhost:8098/register',
-        );
-        $page->title = $name;
-
-        $page->displayTop($css, $js);
-    }
-
     //主页面
     public function home()
     {
@@ -48,7 +34,7 @@ class Index extends Controller
     }
 
     //登陆页面
-    public function signin()
+    public function signIn()
     {
         $js = ['signin'];
         $this->show('signin', [], $js);
@@ -65,8 +51,30 @@ class Index extends Controller
         return view('register');
     }
 
+    //编写文章页面
+    public function articleEdit()
+    {
+        $this->show('articleEdit');
+
+        return view('articleEdit');
+    }
+
+    //输出页面上方
+    public function show($name, $css = [], $js = [])
+    {
+        $page = new Page();
+        $page->buttons = array(
+            '首页' => 'http://localhost:8098/home',
+            '登陆' => 'http://localhost:8098/signin',
+            '注册' => 'http://localhost:8098/register',
+        );
+        $page->title = $name;
+
+        $page->displayTop($css, $js);
+    }
+
     //对登陆页面进行检测
-    public function logincheck(Request $request)
+    public function loginCheck(Request $request)
     {
         $data = $request->param();
         $mysql = new Sql();
@@ -84,7 +92,7 @@ class Index extends Controller
     }
 
     //对注册用户进行检测
-    public function registercheck(Request $request)
+    public function registerCheck(Request $request)
     {
         $mysql = new Sql();
         $ifnull = true;
@@ -125,12 +133,5 @@ class Index extends Controller
     public function captcha($id = 1)
     {
         return captcha($id);
-    }
-
-    public function checkcaptcha(Request $request)
-    {
-        $data = $request->param();
-        // return captcha_check($data["captcha"],1);
-        dump(captcha_check($data['captcha'], 1));
     }
 }

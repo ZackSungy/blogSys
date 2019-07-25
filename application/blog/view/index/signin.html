@@ -1,58 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>login</title>
-</head>
-
 <body>
     <div class="layui-main site-inline">
-        <div class="layui-row layui-bg-gray layui-col-space10">
+        <div class="layui-row layui-bg-gray layui-col-space30">
             <div class="layui-col-md9">
-                <form action={$Think.config.address.signincheck} method="post">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">{$Think.config.name.username}</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="username" required lay-verify="required" class="layui-input">
+                <div class="layui-card">
+                    <form class="layui-form layui-card-body" action={$Think.config.address.signinCheck} method="post">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">{$Think.config.name.username}</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="username" required lay-verify="username" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">请输入正确的用户名</div>
                         </div>
-                        <div class="layui-form-mid layui-word-aux">请输入正确的用户名</div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">{$Think.config.name.password}</label>
-                        <div class="layui-input-inline">
-                            <input type="password" name="password" required lay-verify="required" autocomplete="off"
-                                class="layui-input">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">{$Think.config.name.password}</label>
+                            <div class="layui-input-inline">
+                                <input type="password" name="password" required lay-verify="password" autocomplete="off"
+                                    class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">请输入正确的密码</div>
                         </div>
-                        <div class="layui-form-mid layui-word-aux">请输入正确的密码</div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">{$Think.config.name.captcha}</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="captcha" required lay-verify="required" autocomplete="off"
-                                class="layui-input">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">{$Think.config.name.captcha}</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="captcha" required lay-verify="captcha" autocomplete="off"
+                                    class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">请正确输入下图的验证码</div>
                         </div>
-                        <div class="layui-form-mid layui-word-aux">请正确输入下图的验证码</div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label"></label>&nbsp</label>
-                        <div class="layui-input-inline">
-                            <input type="image" src="{$Think.config.address.captcha}" class="layui-input"
-                                onclick="refresh(this)">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"></label>&nbsp</label>
+                            <div class="layui-input-inline">
+                                <input type="image" src="{$Think.config.address.captcha}" class="layui-input"
+                                    onclick="refresh(this)">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">点击刷新</div>
                         </div>
-                        <div class="layui-form-mid layui-word-aux">点击刷新</div>
-                    </div>
-                    <div class="layui-form-item">
-                        <div class="layui-input-block">
-                            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
                         </div>
+                    </form>
+                </div>
+            </div>
+            <div class="layui-col-md3">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        还没注册？
                     </div>
-                </form>
+                    <div class="layui-card-body">
+                        <button type="button" class="layui-btn layui-btn-radius layui-btn-primary">
+                            <a href={$Think.config.address.register}>现在注册</a>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
+    </div><br />
+    <div class="layui-footer">
+        {$Think.config.foot}
     </div>
-    {$Think.config.foot}
 </body>
 <script>
     //注意：导航 依赖 element 模块，否则无法进行功能性操作

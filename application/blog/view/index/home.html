@@ -1,5 +1,23 @@
-<div class="layui-form component" lay-filter="LAY-site-header-component"></div>
-
+<div class="layui-main site-inline">
+  <div class="layui-row layui-bg-gray layui-col-space30">
+    <div class="layui-col-md9">
+      <div class="layui-card">
+      </div>
+    </div>
+    <div class="layui-col-md3">
+      <div class="layui-card">
+        <div class="layui-card-body">
+          ZackSunGY
+        </div>
+        <hr>
+        <div class="layui-card-body">
+            <i class="layui-icon layui-icon-edit" style="font-size: 30px; color: #1E9FFF;"></i>
+            <a href={$Think.config.address.articleEdit}>	创作新主题</a> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
   //注意：导航 依赖 element 模块，否则无法进行功能性操作
   layui.use('element', function () {

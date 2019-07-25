@@ -24,7 +24,7 @@ class BlogPage
         echo '<title>'.$this->title."</title>\n";
     }
 
-    public function displaykeywords()
+    public function displayKeywords()
     {
         echo "<meta name = 'keywords' content = '".$this->keywords."'/ >\n";
     }
@@ -82,6 +82,7 @@ class BlogPage
     public function displayMenu()
     {
         ?>
+        <body class="layui-bg-gray">
         <div class="layui-header header header-doc layui-bg-black">
         <div class="layui-main">
         <img class ="layui-col-md2" src=<?=config('view_replace_str')['__IMG__'].'logo.gif'; ?> style="height:60px">

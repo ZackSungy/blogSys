@@ -1,0 +1,62 @@
+<div class="layui-main site-inline">
+    <div class="layui-row layui-bg-gray layui-col-space30">
+        <div class="layui-col-md9">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    <a href={$Think.config.address.home}>SkyFire</a>
+                    <i class="layui-icon layui-icon-right"></i>
+                    创建新主题
+                </div>
+                <div class="layui-card-body">
+                    <form class="layui-form layui-card-body" action="" method="post">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">标题（120）</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="title" maxlength="120" required lay-verify="title" placeholder="请输入标题，长度为120，如果标题可以表达完整内容，则正文可以为空"
+                                    autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">正文</label>
+                            <div class="layui-input-block">
+                                <textarea name="content" placeholder="请输入内容" class="layui-textarea"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    ZackSunGY
+                </div>
+                <hr>
+                <div class="layui-card-body">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    layui.use('form',function(){
+        var form = layui.form;
+
+        form.verify({
+            title: function(value){
+                if(value.length==0){
+                    return '主题不能为空!';
+
+                }
+                else if(value.length>1000){
+                    return '主题超过长度！'
+                }
+            }
+        })
+    })
+</script>

@@ -2,11 +2,11 @@
 
 return[
     'home' => 'blog/index/home',
-    'signin' => 'blog/index/signin',
-    'signincheck' => 'blog/index/logincheck',
+    'signin' => 'blog/index/signIn',
+    'signincheck' => 'blog/index/loginCheck',
     'register' => 'blog/index/register',
-    'registercheck'=>'blog/index/registercheck',
-    'information'=>'blog/index/information',
+    'registercheck' => 'blog/index/registerCheck',
+    'information' => 'blog/index/information',
     'captcha' => 'blog/index/captcha',
-    'checkcaptcha' => 'blog/index/checkcaptcha',
+    'articleEdit' => 'blog/index/articleEdit',
 ];
