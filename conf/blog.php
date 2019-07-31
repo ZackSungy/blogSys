@@ -52,7 +52,8 @@ return [
         'information',
         'captcha',
         'articleEdit',
-    ],
+        'articleEditCheck',
+     ],
     'captcha' => [
     //验证成功是否重置
     'reset' => true,

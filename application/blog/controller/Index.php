@@ -28,7 +28,10 @@ class Index extends Controller
     //主页面
     public function home()
     {
+        $mysql = new Sql();
+
         $this->show('home');
+        $this->assign('question', $mysql->checkData('question_list'));
 
         return view('home');
     }
@@ -54,7 +57,9 @@ class Index extends Controller
     //编写文章页面
     public function articleEdit()
     {
+        $mysql = new Sql();
         $this->show('articleEdit');
+        $this->assign('type', $mysql->checkData('question_type'));
 
         return view('articleEdit');
     }
@@ -117,6 +122,19 @@ class Index extends Controller
             $mysql->addData('userinfo', $data);
             $this->success('注册成功！', config('address')['signin']);
         }
+    }
+
+    //发布主题
+    public function articleEditCheck(Request $request)
+    {
+        $mysql = new Sql();
+        $data = $request->param();
+
+        $data['fromuser'] = 'ZackSunGY';
+        $data['date'] = date('Y-m-d H:i:s');
+        dump($data);
+
+        $this->success($mysql->addData('question_list', $data), config('address')['home']);
     }
 
     //测试页面信息

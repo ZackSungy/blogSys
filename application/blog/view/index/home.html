@@ -2,6 +2,15 @@
   <div class="layui-row layui-bg-gray layui-col-space30">
     <div class="layui-col-md9">
       <div class="layui-card">
+        {volist name="question" id="data"}
+        <div class="layui-card-body">
+          <a><h3>{$data.title}</h3></a><br>
+          <button type="button" class="layui-btn layui-btn-xs">{$data.questiontype}</button>
+          <span class="layui-badge-dot layui-bg-gray"></span>
+          <a>{$data.fromuser}</a>
+          <hr>
+        </div>
+        {/volist}
       </div>
     </div>
     <div class="layui-col-md3">
@@ -11,8 +20,8 @@
         </div>
         <hr>
         <div class="layui-card-body">
-            <i class="layui-icon layui-icon-edit" style="font-size: 30px; color: #1E9FFF;"></i>
-            <a href={$Think.config.address.articleEdit}>	创作新主题</a> 
+          <i class="layui-icon layui-icon-edit" style="font-size: 30px; color: #1E9FFF;"></i>
+          <a href={$Think.config.address.articleEdit}> 创作新主题</a>
         </div>
       </div>
     </div>

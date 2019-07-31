@@ -8,25 +8,39 @@
                     创建新主题
                 </div>
                 <div class="layui-card-body">
-                    <form class="layui-form layui-card-body" action="" method="post">
+                    <form class="layui-form layui-card-body" action={$Think.config.address.articleEditCheck} method="post">
                         <div class="layui-form-item">
-                            <label class="layui-form-label">标题（120）</label>
+                            <label class="layui-form-label">标题(120)</label>
                             <div class="layui-input-block">
-                                <input type="text" name="title" maxlength="120" required lay-verify="title" placeholder="请输入标题，长度为120，如果标题可以表达完整内容，则正文可以为空"
-                                    autocomplete="off" class="layui-input">
+                                <textarea name="title" maxlength="120" required lay-verify="title"
+                                placeholder="请输入标题，长度为120，如果标题可以表达完整内容，则正文可以为空" autocomplete="off" class="layui-textarea"></textarea>
+                                
                             </div>
-                        </div>
+                        </div><hr>
+
                         <div class="layui-form-item layui-form-text">
-                            <label class="layui-form-label">正文</label>
+                            <label class="layui-form-label">正文(20000)</label>
                             <div class="layui-input-block">
-                                <textarea name="content" placeholder="请输入内容" class="layui-textarea"></textarea>
+                                <textarea name="content" maxlength="20000" placeholder="请输入内容" class="layui-textarea"></textarea>
                             </div>
-                        </div>
+                        </div><hr>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">问题类型</label>
+                            <div class="layui-input-inline">
+                                <select name="questiontype">
+                                    {volist name='type' id='data'}
+                                    <option value={$data.type}>{$data.type}/{$data.alias}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div><hr>
+
                         <div class="layui-form-item">
                             <div class="layui-input-block">
                                 <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
                             </div>
-                        </div>
+                        </div><hr>
                     </form>
                 </div>
             </div>
@@ -44,16 +58,16 @@
     </div>
 </div>
 <script>
-    layui.use('form',function(){
+    layui.use('form', function () {
         var form = layui.form;
 
         form.verify({
-            title: function(value){
-                if(value.length==0){
+            title: function (value) {
+                if (value.length == 0) {
                     return '主题不能为空!';
 
                 }
-                else if(value.length>1000){
+                else if (value.length > 1000) {
                     return '主题超过长度！'
                 }
             }

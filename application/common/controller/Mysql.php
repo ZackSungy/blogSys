@@ -7,49 +7,75 @@ use think\Db;
 class Mysql
 {
     //查看数据库
-    public function checkData($name, $where=[])
+    public function checkData($name, $where = [])
     {
-        return Db::table($name)->where($where)->find();
+        return Db::table($name)->where($where)->select();
     }
 
     //添加单条数据
-    public function addData($name, $data=[], $where=[])
+    public function addData($name, $data = [], $where = [])
     {
-        if ($this->checkData($name, $where)) {
+        // 启动事务
+        Db::startTrans();
+        if ($where && $this->checkData($name, $where)) {
             return false;
         }
-        Db::table($name)->insert($data);
-        return true;
+        try {
+            $id = Db::table($name)->insertGetId($data);
+            // 提交事务
+            Db::commit();
+
+            return $id;
+        } catch (\Exception $e) {
+            // 回滚事务
+            Db::rollback();
+        }
     }
 
     //添加多条数据
-    public function addAllData($name, $data=[[]])
+    public function addAllData($name, $data = [[]], $where = [])
     {
-        $count=0;
-        for ($i=0;$i<count($data);$i++) {
-            $where=$data[$i];
+        $count = 0;
+        for ($i = 0; $i < count($data); ++$i) {
             if ($this->addData($name, $data, $where)) {
-                $count++;
+                ++$count;
             }
         }
-        return "成功添加"+$count+" 条数据";
+
+        return $count;
     }
 
     //删除数据
-    public function delData($name, $where=[])
+    public function delData($name, $where = [])
     {
-        if (Db::table($name)->where($where)->delete() === 0) {
-            return false;
+        try {
+            if (Db::table($name)->where($where)->delete() === 0) {
+                return false;
+            }
+            // 提交事务
+            Db::commit();
+        } catch (\Exception $e) {
+            // 回滚事务
+            Db::rollback();
         }
+
         return true;
     }
 
     //修改数据
-    public function updataData($name, $where=[], $data=[])
+    public function updataData($name, $where = [], $data = [])
     {
-        if (Db::table($name)->where($where)->update($data) === 0) {
-            return false;
+        try {
+            if (Db::table($name)->where($where)->update($data) === 0) {
+                return false;
+            }
+            // 提交事务
+            Db::commit();
+        } catch (\Exception $e) {
+            // 回滚事务
+            Db::rollback();
         }
+
         return true;
     }
 }

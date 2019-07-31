@@ -9,4 +9,5 @@ return[
     'information' => 'blog/index/information',
     'captcha' => 'blog/index/captcha',
     'articleEdit' => 'blog/index/articleEdit',
+    'articleEditCheck' => 'blog/index/articleEditCheck',
 ];
