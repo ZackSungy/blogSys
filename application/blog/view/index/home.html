@@ -4,7 +4,9 @@
       <div class="layui-card">
         {volist name="question" id="data"}
         <div class="layui-card-body">
-          <a><h3>{$data.title}</h3></a><br>
+          <a>
+            <h3>{$data.title}</h3>
+          </a><br>
           <button type="button" class="layui-btn layui-btn-xs">{$data.questiontype}</button>
           <span class="layui-badge-dot layui-bg-gray"></span>
           <a>{$data.fromuser}</a>
@@ -26,6 +28,9 @@
       </div>
     </div>
   </div>
+</div> <br />
+<div class="layui-footer">
+  {$Think.config.foot}
 </div>
 <script>
   //注意：导航 依赖 element 模块，否则无法进行功能性操作

@@ -4,8 +4,10 @@ namespace  app\blog\controller;
 
 use app\common\controller\BlogPage as Page;
 use app\common\controller\Mysql as Sql;
+use app\common\controller\Safe;
 use think\Request;
 use think\Controller;
+use think\Cookie;
 
 class Index extends Controller
 {
@@ -29,6 +31,7 @@ class Index extends Controller
     public function home()
     {
         $mysql = new Sql();
+        dump(Cookie::get('token'));
 
         $this->show('home');
         $this->assign('question', $mysql->checkData('question_list'));
@@ -79,19 +82,23 @@ class Index extends Controller
     }
 
     //对登陆页面进行检测
-    public function loginCheck(Request $request)
+    public function signInCheck(Request $request)
     {
         $data = $request->param();
         $mysql = new Sql();
+        $safe = new Safe();
+        $salt = $mysql->checkData('userinfo', ['username' => $data['username']])[0]['salt'];
         $where = [
             'username' => $data['username'],
-            'password' => $data['password'],
+            'password' => $safe->encrypt($data['password'], $salt),
         ];
         if (!captcha_check($data['captcha'], 1)) {
             $this->error('验证码不正确');
         } elseif (!$mysql->checkData('userinfo', $where)) {
             $this->error('用户名或账号不存在或密码不匹配!!!');
         } else {
+            Cookie::set('username', $data['username'], 604800);
+            Cookie::set('token', $data['token'], 604800);
             $this->success('登陆成功!!!', config('address')['signin']);
         }
     }
@@ -100,6 +107,7 @@ class Index extends Controller
     public function registerCheck(Request $request)
     {
         $mysql = new Sql();
+        $safe = new Safe();
         $ifnull = true;
         $data = $request->param(); //username:用户名    password:密码     passwordcopy:重复密码     phonenumber:手机号码    email:邮箱    code:验证码
         //循环查找是否为空
@@ -115,11 +123,18 @@ class Index extends Controller
             $this->error('验证码不正确');
         } elseif ($data['password'] != $data['passwordcopy']) {
             $this->error('两次填写密码不相同！');
+        } elseif ($mysql->checkData('userinfo', ['username' => $data['username']])) {
+            $this->error('该用户已经存在！');
         } else {
+            $password = $data['password'];
+            $salt = $safe->salt();
+            $data['password'] = $safe->encrypt($password, $salt);
+            $data['salt'] = $salt;
             $data['rtime'] = time();
             unset($data['passwordcopy']);
             unset($data['captcha']);
-            $mysql->addData('userinfo', $data);
+            dump($data);
+            dump($mysql->addData('userinfo', $data));
             $this->success('注册成功！', config('address')['signin']);
         }
     }
@@ -141,8 +156,10 @@ class Index extends Controller
     public function information($id = '')
     {
         $mysql = new Sql();
+        $safe = new Safe();
+
         // phpinfo();
-        dump($mysql->checkData('userinfo'));
+        echo $this->refreshcaptcha();
         // dump(config());
         // dump(config('url_name'));
     }

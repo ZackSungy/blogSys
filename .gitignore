@@ -5,4 +5,5 @@ composer.lock
 thinkphp/
 runtime/
 conf/database.php
+application/common/controller/Safe.php
 php-cs-fixer-v2.phar

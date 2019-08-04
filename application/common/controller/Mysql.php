@@ -17,7 +17,7 @@ class Mysql
     {
         // 启动事务
         Db::startTrans();
-        if ($where && $this->checkData($name, $where)) {
+        if ($where !== [] && $this->checkData($name, $where)) {
             return false;
         }
         try {
