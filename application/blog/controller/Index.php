@@ -8,6 +8,7 @@ use app\common\controller\Safe;
 use think\Request;
 use think\Controller;
 use think\Cookie;
+use think\Session;
 
 class Index extends Controller
 {
@@ -20,7 +21,7 @@ class Index extends Controller
         $address = [];
         //页脚设置
         config('foot', $page->displayFooter());
-        //网站的地址名称设置
+        // 网站的地址名称设置
         foreach (config('url_name') as $key => $value) {
             $address[$value] = config('app_url').$value;
         }
@@ -31,8 +32,11 @@ class Index extends Controller
     public function home()
     {
         $mysql = new Sql();
-        dump(Cookie::get('token'));
-
+        $this->assign('signin', 'no');
+        if (Session::has('username')) {
+            $this->assign('signin', 'yes');
+            $this->assign('username', Session::get('username'));
+        }
         $this->show('home');
         $this->assign('question', $mysql->checkData('question_list'));
 
@@ -67,15 +71,43 @@ class Index extends Controller
         return view('articleEdit');
     }
 
+    //用户页面
+    public function user()
+    {
+        $this->show('user');
+
+        return view('user');
+    }
+
+    //设置页面
+    public function set()
+    {
+        $this->show('set');
+
+        return view('set');
+    }
+
+    //登出
+    public function logout()
+    {
+        Session::delete('username');
+        Session::destroy();
+        $this->success('登出成功!!!', config('address')['home']);
+    }
+
     //输出页面上方
     public function show($name, $css = [], $js = [])
     {
         $page = new Page();
-        $page->buttons = array(
-            '首页' => 'http://localhost:8098/home',
-            '登陆' => 'http://localhost:8098/signin',
-            '注册' => 'http://localhost:8098/register',
-        );
+        if (Session::has('username')) {
+            $page->buttons = array(
+            '首页' => '/home',
+            Session::get('username') => '/user',
+            '设置' => '/set',
+            '登出' => '/logout',
+         );
+        }
+
         $page->title = $name;
 
         $page->displayTop($css, $js);
@@ -97,9 +129,10 @@ class Index extends Controller
         } elseif (!$mysql->checkData('userinfo', $where)) {
             $this->error('用户名或账号不存在或密码不匹配!!!');
         } else {
-            Cookie::set('username', $data['username'], 604800);
-            Cookie::set('token', $data['token'], 604800);
-            $this->success('登陆成功!!!', config('address')['signin']);
+            Session::set('username', $data['username']);
+            Cookie::set('username', $data['username'], 10);
+            Cookie::set('token', $data['token'], 10);
+            $this->success('登陆成功!!!', config('address')['home']);
         }
     }
 
@@ -158,10 +191,11 @@ class Index extends Controller
         $mysql = new Sql();
         $safe = new Safe();
 
-        // phpinfo();
-        echo $this->refreshcaptcha();
-        // dump(config());
-        // dump(config('url_name'));
+        echo Session::has('username');
+        echo Session::get('username');
+        // Session::delete('username');
+        Session::destroy();
+        echo session_id();
     }
 
     //输出验证码

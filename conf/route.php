@@ -10,4 +10,7 @@ return[
     'captcha' => 'blog/index/captcha',
     'articleEdit' => 'blog/index/articleEdit',
     'articleEditCheck' => 'blog/index/articleEditCheck',
+    'user' => 'blog/index/user',
+    'set' => 'blog/index/set',
+    'logout' => 'blog/index/logout',
 ];

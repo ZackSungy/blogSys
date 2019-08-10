@@ -3,7 +3,7 @@
         <div class="layui-row layui-bg-gray layui-col-space30">
             <div class="layui-col-md9">
                 <div class="layui-card">
-                    <form class="layui-form layui-card-body" action={$Think.config.address.registerCheck} method="post">
+                    <form class="layui-form layui-card-body" action="registerCheck" method="post">
                         <div class="layui-form-item">
                             <label class="layui-form-label">{$Think.config.name.username}</label>
                             <div class="layui-input-inline">
@@ -53,14 +53,14 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">&nbsp</label>
                             <div class="layui-input-inline">
-                                <img id="captcha" src="{$Think.config.address.captcha}" class="layui-input"
+                                <img id="captcha" src="captcha" class="layui-input"
                                     onclick="refresh(this)">
                             </div>
                             <div class="layui-form-mid layui-word-aux">点击图片刷新</div>
                         </div>
                         <div class="layui-form-item">
                             <div class="layui-input-block">
-                                <button class="layui-btn" lay-submit lay-filter="formDemo" onclick="refreshcaptcha()">立即提交</button>
+                                <button class="layui-btn" lay-submit lay-filter="formDemo" onclick="setTimeout(refreshcaptcha,1000)">立即提交</button>
                             </div>
                         </div>
                     </form>
@@ -69,7 +69,7 @@
             <div class="layui-col-md3">
                 <div class="layui-card">
                     <div class="layui-card-header">
-                        已经注册请<span class="layui-badge-dot"></span><a href={$Think.config.address.signin}>登陆</a>
+                        已经注册请<span class="layui-badge-dot"></span><a href="signin">登陆</a>
                     </div>
                 </div>
             </div>

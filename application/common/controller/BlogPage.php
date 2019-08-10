@@ -8,9 +8,9 @@ class BlogPage
     public $title = 'SkyFire';
     public $keywords = 'SkyFire';
     public $buttons = array(
-        '首页' => 'home',
-        '登陆' => 'sigin',
-        '注册' => 'register',
+        '首页' => '/home',
+        '登陆' => '/signin',
+        '注册' => '/register',
     );
 
     public function __set($name, $value)

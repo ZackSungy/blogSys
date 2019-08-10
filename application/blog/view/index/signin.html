@@ -3,7 +3,7 @@
         <div class="layui-row layui-bg-gray layui-col-space30">
             <div class="layui-col-md9">
                 <div class="layui-card">
-                    <form class="layui-form layui-card-body" action={$Think.config.address.signinCheck} method="post">
+                    <form class="layui-form layui-card-body" action="signinCheck" method="post">
                         <div class="layui-form-item">
                             <label class="layui-form-label">{$Think.config.name.username}</label>
                             <div class="layui-input-inline">
@@ -33,7 +33,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label"></label>&nbsp</label>
                             <div class="layui-input-inline">
-                                <img id="captcha" src="{$Think.config.address.captcha}" class="layui-input"
+                                <img id="captcha" src="captcha"class="layui-input"
                                     onclick="refresh(this)">
                             </div>
                             <div class="layui-form-mid layui-word-aux">点击刷新</div>
@@ -42,7 +42,7 @@
                         {:token('token')}
                         <div class="layui-form-item">
                             <div class="layui-input-block">
-                                <button class="layui-btn" lay-submit lay-filter="formDemo" onclick="refreshcaptcha()">立即提交</button>
+                                <button class="layui-btn" lay-submit lay-filter="formDemo" onclick="setTimeout(refreshcaptcha,1000)">立即提交</button>
                             </div>
                         </div>
                     </form>
@@ -55,7 +55,7 @@
                     </div>
                     <div class="layui-card-body">
                         <button type="button" class="layui-btn layui-btn-radius layui-btn-primary">
-                            <a href={$Think.config.address.register}>现在注册</a>
+                            <a href="register">现在注册</a>
                         </button>
                     </div>
                 </div>

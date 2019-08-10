@@ -15,18 +15,40 @@
         {/volist}
       </div>
     </div>
+
     <div class="layui-col-md3">
       <div class="layui-card">
         <div class="layui-card-body">
-          ZackSunGY
+          {switch name="signin"}
+          {case value="yes"}
+            <a href="user"></a>{$username}</a>
+          {/case}
+          {default /}"SkyFire is testing now"
+          {/switch}
         </div>
         <hr>
         <div class="layui-card-body">
-          <i class="layui-icon layui-icon-edit" style="font-size: 30px; color: #1E9FFF;"></i>
-          <a href={$Think.config.address.articleEdit}> 创作新主题</a>
+          {switch name="signin"}
+          {case value="yes"}
+            <i class="layui-icon layui-icon-edit" style="font-size: 30px; color: #1E9FFF;"></i>
+            <a href="articleEdit"> 创作新主题</a>
+          {/case}
+          {default /}
+          <div class="layui-card">
+              <div class="layui-card-body">
+                  <button type="button" class="layui-btn layui-btn-radius layui-btn-primary">
+                      <a href="register">现在注册</a>
+                  </button>
+                  <div class="layui-card-header">
+                      已经注册请<span class="layui-badge-dot"></span><a href="signin">登陆</a>
+                  </div>
+              </div>
+          </div>
+          {/switch}
         </div>
       </div>
     </div>
+
   </div>
 </div> <br />
 <div class="layui-footer">
